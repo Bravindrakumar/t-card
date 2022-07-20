@@ -30,9 +30,9 @@ jobs:
           fi
 
           if [[ $(echo "git_diff" | grep 'b/') ]]; then
-            deploy_git_diff=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }} | grep 'b/')
+            deploy_git_diff=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }} | grep 'b/**')
           else
-            deploy_git_diff=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep 'b/')
+            deploy_git_diff=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep 'b/**')
 
           
   build:
