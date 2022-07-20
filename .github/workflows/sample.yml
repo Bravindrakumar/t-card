@@ -34,7 +34,7 @@ jobs:
           else
             deploy_git_diff=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep 'b/')
 
-          echo "::set-output name=matrix::$(cat b/**)"
+          echo ::set-output name=matrix::$(cat b/**)
 
   build:
     runs-on: ubuntu-latest
