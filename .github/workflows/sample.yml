@@ -9,6 +9,7 @@ on:
       - main
     paths:
       - 'b/**'
+      - '.github/workflows/sample.yml'
 jobs:
   setup:
     runs-on: ubuntu-latest
