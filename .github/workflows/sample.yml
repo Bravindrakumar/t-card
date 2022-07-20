@@ -19,7 +19,7 @@ jobs:
           fetch-depth: 0
 
       - name: determine setup configuration
-        id: setup--env-matrix.outputs.matrix
+        id: setup-env-matrix.outputs.matrix
         run: |
           if ${{ github.event_name == 'pull_request' }}; then
             git_diff=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }})
