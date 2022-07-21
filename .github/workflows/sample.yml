@@ -3,13 +3,11 @@ on:
   pull_request:
     paths:
       - 'b/**'
-      - '.github/workflows/sample.yml'
   push:
     branches:
       - main
     paths:
       - 'b/**'
-      - '.github/workflows/sample.yml'
 jobs:
   setup:
     runs-on: ubuntu-latest
@@ -21,7 +19,7 @@ jobs:
           fetch-depth: 0
 
       - name: determine setup configuration
-        id: setup-env-matrix-outputs-matrix
+        id: diff
         run: |
           if ${{ github.event_name == 'pull_request' }}; then
             git_diff=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }})
@@ -30,11 +28,19 @@ jobs:
           fi
 
           if [[ $(echo "git_diff" | grep 'b/') ]]; then
-            deploy_git_diff=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }} | grep 'b/**')
+            deploy_git_diff=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }} | grep 'b')
           else
-            deploy_git_diff=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep 'b/**')
+            deploy_git_diff=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep 'b')
 
-          
+          echo "::set-output name=diff::$( echo "$deploy_git_diff" )"  
+
+      - name: setmatrix for build
+        id: set-matrix
+        run: |
+          deploy_git_diff="${{ steps.diff.outputs.diff }}"
+          Json="{\"env\":["xy", "yz"]}"
+          echo "$Json"    
+
   build:
     runs-on: ubuntu-latest
     needs: setup
