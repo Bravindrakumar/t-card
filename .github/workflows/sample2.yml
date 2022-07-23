@@ -7,10 +7,10 @@ on:
 jobs:
   buld:
     runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - name: executing shell script
-          run: | 
-            Json= {"include": [{"env": "xy"}, {"env": "yz"}]}
-            echo ::set-output name=matrix::(cat Json)
+    steps:
+      - uses: actions/checkout@v2
+      - name: executing shell script
+        run: | 
+          Json= {"include": [{"env": "xy"}, {"env": "yz"}]}
+          echo ::set-output name=matrix::(cat Json)
             
