@@ -31,9 +31,7 @@ jobs:
       - name: setmatrix for build
         id: set-matrix
         run: |
-          deploy_git_diff="${{ steps.diff.outputs.diff }}"
-          Json="{\"env\":["xy", "yz"]}"
-          echo "$Json"    
+          echo "::set-output name=matrix::{\"include\":[{\"env\":"xy"}, {"env\":"yz"}]}"    
 
   build:
     runs-on: ubuntu-latest
