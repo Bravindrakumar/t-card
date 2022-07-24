@@ -13,5 +13,5 @@ jobs:
       - name: executing shell script
         run: | 
           Json= {"include": [{"env": "xy"}, {"env": "yz"}]}
-          echo ::set-output name=matrix::(cat Json)
+          echo "::set-output name=matrix::(cat $Json)"
             
