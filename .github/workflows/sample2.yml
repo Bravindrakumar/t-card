@@ -15,7 +15,7 @@ jobs:
       - id: set-matrix
         run: | 
           
-          echo "::set-output name=matrix::{"\include\": [{"\env\": "xy"}, {"\env\": "yz"}]}"
+          echo "::set-output name=matrix::{"\exclude\": [{"\env\": "xy"}, {"\env\": "yz"}]}"
           
             
   deploy:
