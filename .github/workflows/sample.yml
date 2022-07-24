@@ -33,7 +33,7 @@ jobs:
       - name: setmatrix for build
         id: set-matrix
         run: |
-          echo ::set-output name=matrix::{\"env\":[{\"xy\"}, {"\yz\"}]}    
+          echo '::set-output name=matrix::[\"xy\", \"yz\"]'  
 
   build:
     runs-on: ubuntu-latest
