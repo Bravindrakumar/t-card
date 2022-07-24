@@ -23,5 +23,5 @@ jobs:
     env:
       CUR_ENV: ${{ matrix.env }}
     steps:
-      - run:
-        echo "${{ matrix.env }}"    
+      - run: |
+          echo "${{ matrix.env }}"    
