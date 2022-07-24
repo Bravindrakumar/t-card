@@ -22,7 +22,7 @@ jobs:
     needs: buld
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{ fromJson(needs.build.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.buld.outputs.matrix) }}
     env:
       CUR_ENV: ${{ matrix.env }}
     steps:
