@@ -3,11 +3,13 @@ on:
   pull_request:
     paths:
       - 'b/**'
+      - '.github/workflows/sample.yml'
   push:
     branches:
       - main
     paths:
       - 'b/**'
+      - '.github/workflows/sample.yml'
 jobs:
   setup:
     runs-on: ubuntu-latest
