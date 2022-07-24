@@ -14,4 +14,14 @@ jobs:
         run: | 
           
           echo "::set-output name=matrix::{"include": [{"env": "xy"}, {"env": "yz"}]}"
+          
             
+  deploy:
+    runs-on: ubuntu-latest
+    stratey:
+      matrix: ${{fromJson(needs.build.matrix)}}
+    env:
+      CUR_ENV: ${{ matrix.env }}
+    steps:
+      - run:
+        echo "${{ matrix.env }}"    
