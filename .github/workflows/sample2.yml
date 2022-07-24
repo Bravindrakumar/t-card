@@ -19,7 +19,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJson(needs.build.matrix)}}
+      matrix: ${{fromJson(needs.build.outputs.matrix)}}
     env:
       CUR_ENV: ${{ matrix.env }}
     steps:
