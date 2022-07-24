@@ -24,7 +24,7 @@ jobs:
     strategy:
       matrix: ${{ fromJson(needs.buld.outputs.matrix) }}
     env:
-      CUR_ENV: ${{ matrix.env }}
+      CUR_ENV: ${{ matrix.include }}
     steps:
       - run: |
-          echo ${{ matrix.env }}    
+          echo ${{ matrix.include }}    
