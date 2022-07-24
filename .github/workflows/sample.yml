@@ -28,12 +28,10 @@ jobs:
           else
             git_diff=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
           fi
-
-          
-      - name: setmatrix for build
-        id: set-matrix
+          echo '::set-output name=matrix::[\"xy\", \"yz\"]'
+      - name: check output(debug)
         run: |
-          echo '::set-output name=matrix::[\"xy\", \"yz\"]'  
+          echo 'test ${{ fromJson(steps.job1.outputs.matrix) }}'
           echo '${{ fromJson(steps.job1.outputs.matrix) }}'
 
   build:
