@@ -2,6 +2,7 @@ on:
   push:
     paths:
       - 'b/**'
+      - '.github/workflows/sample2.yml'
     
 
 jobs:
