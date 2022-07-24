@@ -11,10 +11,10 @@ on:
       - 'b/**'
       - '.github/workflows/sample.yml'
 jobs:
-  setup:
+  job1:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.setup-env-matrix.outputs.matrix }}
+      matrix: ${{ steps.job1.outputs.matrix }}
     steps:
       - uses: actions/checkout@v2
         with:
@@ -34,12 +34,13 @@ jobs:
         id: set-matrix
         run: |
           echo '::set-output name=matrix::[\"xy\", \"yz\"]'  
+          echo '${{ fromJson(steps.job1.outputs.matrix) }}'
 
   build:
     runs-on: ubuntu-latest
-    needs: setup
+    needs: job1
     strategy:
-      matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
+      matrix: ${{ fromJson(needs.job1.outputs.matrix) }}
     env: 
       CUR_ENV: b/${{ matrix.env }}
     steps: 
