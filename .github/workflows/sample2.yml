@@ -8,9 +8,11 @@ on:
 jobs:
   buld:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v2
-      - name: executing shell script
+      - id: set-matrix
         run: | 
           
           echo "::set-output name=matrix::{"include": [{"env": "xy"}, {"env": "yz"}]}"
