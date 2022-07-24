@@ -18,7 +18,7 @@ jobs:
             
   deploy:
     runs-on: ubuntu-latest
-    stratey:
+    strategy:
       matrix: ${{fromJson(needs.build.matrix)}}
     env:
       CUR_ENV: ${{ matrix.env }}
