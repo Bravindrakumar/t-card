@@ -17,8 +17,8 @@ jobs:
       - uses: actions/checkout@v2
       - id: set-matrix
         run: |
-          echo ::set-output name=matrix::$(bash .github/shell/a.sh "$env")
-          echo "$env"
+          echo ::set-output name=matrix::$(bash .github/shell/a.sh "$dev")
+          echo "$dev"
         
   
   
