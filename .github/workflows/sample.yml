@@ -9,12 +9,30 @@ on:
       - 'b/**'
       - '.github/workflows/sample.yml'
 jobs:
-  build:
+  setup:
     runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.setup-env-matrix.outputs.matrix }}
     steps:
-      - uses: actions/checkout@v3
-      
-      - run: python .github/shell/determinefolder.py
-        
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: determine setup configuration
+        id: setup-env-matrix
+        run: |
+          if ${{ github.event_name == 'pull_request' }}; then
+            git_diff=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }})
+          else
+            git_diff=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
+          fi
+
+          if [[ $(echo "git_diff" | grep 'b/') ]]; then
+            deploy_git_diff=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }} | grep '**/**')
+          else
+            deploy_git_diff=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '**/**')
+          
+          echo ::set-output name=matrix::$(python .github/shell/determinefolder.py "$deploy_git_diff")
+
   
   
