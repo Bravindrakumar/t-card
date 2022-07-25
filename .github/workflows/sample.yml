@@ -30,7 +30,7 @@ jobs:
             git_diff=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
           fi
 
-          if [[ "$(echo "$git_diff" | grep '/b')" ]]; then
+          if [[ "$(echo "$git_diff" | grep 'b/')" ]]; then
              if ${{ github.event_name == 'pull_request' }}; then
                deploy_git_diff=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }} | 'b/**')
             else
