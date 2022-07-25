@@ -27,6 +27,30 @@ jobs:
            export DIFF=$( git diff --dirstat=files,0,cumulative ${{ github.event.pull_request.base.sha }} | awk -F ' ' '{print $2}' )
            echo "$DIFF"
            echo "::set-output name=diff::$( echo "$DIFF" | sed ':a;N;$!ba;s/\n/%0A/g' )"
+      - name: Set matrix for build
+        id: set-matrix
+        run: |
+          # See https://stackoverflow.com/a/62953566/11948346
+          DIFF="${{ steps.diff.outputs.diff }}"
+          JSON="{\"tfpaths\":["\xy\", \"yz\"]
+
+          # Loop by lines
+          while read path; do
+          # Add item to the matrix only if it is not already included
+          JSONline="\"$path\","
+          if [[ "$JSON" != *"$JSONline"* ]]; then
+          JSON="$JSON$JSONline"
+          fi
+          done <<< "$DIFF"
+
+          # Remove last "," and add closing brackets
+          if [[ $JSON == *, ]]; then
+          JSON="${JSON%?}"
+          fi
+          JSON="$JSON]}"
+          echo $JSON
+          # Set output
+          echo "::set-output name=matrix::$( echo "$JSON" )     
  
           
 
