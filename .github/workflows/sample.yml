@@ -35,4 +35,4 @@ jobs:
                deploy_git_diff=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }} | 'b/**')
             else
                deploy_git_diff=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep 'b/**')
-            fi   
+             fi   
