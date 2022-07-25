@@ -32,24 +32,9 @@ jobs:
           else
             git_diff=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }})
           fi
-          echo "::set-output name=matrix::[\"xy\", \"yz\"]"
-      - name: check output(debug)
-        run: |
-          echo 'test ${{ fromJson(steps.job1.outputs.matrix) }}'
-          echo '${{ fromJson(steps.job1.outputs.matrix) }}'
 
-  build:
-    runs-on: ubuntu-latest
-    needs: job1
-    strategy:
-      matrix: ${{ fromJson(needs.job1.outputs.matrix) }}
-    env: 
-      CUR_ENV: b/${{ matrix.env }}
-    steps: 
-      - uses: actions/checkout@v2
-      - name: shell command
-        run: |
-          echo "${{ matrix.env }}"    
-
-    
-    
+          if [[ "$(echo "$git_diff" | grep '/b')" ]]; then
+            if deploy_git_diff=$(git diff --name-only origin/${{ githu.base_ref }} origin/${{ github.head_ref }} | 'b/**')
+            else
+               deploy_git_diff=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep 'b/**')
+            fi   
