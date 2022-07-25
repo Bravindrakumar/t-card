@@ -1,56 +1,27 @@
-name: sample yaml
-on:
+name: manifests
+on: 
   pull_request:
-    paths:
+    paths: 
       - 'b/**'
-      - '.github/workflows/sample.yml'
   push:
-    branches:
-      - main
-    paths:
+    paths: 
       - 'b/**'
-      - '.github/workflows/sample.yml'
 jobs:
-  job1:
+  list-manifests:
     runs-on: ubuntu-latest
     outputs:
-      matrix: ${{ steps.job1.outputs.matrix }}
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-      
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: determine setup configuration
-        id: diff
-        run: |
-           export DIFF=$( git diff --dirstat=files,0,cumulative ${{ github.event.pull_request.base.sha }} | awk -F ' ' '{print $2}' )
-           echo "$DIFF"
-           echo "::set-output name=diff::$( echo "$DIFF" | sed ':a;N;$!ba;s/\n/%0A/g' )"
-      - name: Set matrix for build
-        id: set-matrix
-        run: |
-          # See https://stackoverflow.com/a/62953566/11948346
-          DIFF="${{ steps.diff.outputs.diff }}"
-          JSON="{\"tfpaths\":["
-
-          # Loop by lines
-          while read path; do
-          # Add item to the matrix only if it is not already included
-          JSONline="\"$path\","
-          if [[ "$JSON" != *"$JSONline"* ]]; then
-          JSON="$JSON$JSONline"
-          fi
-          done <<< "$DIFF"
-
-          # Remove last "," and add closing brackets
-          if [[ $JSON == *, ]]; then
-          JSON="${JSON%?}"
-          fi
-          JSON="$JSON]}"
-          echo $JSON
-          # Set output
-          echo "::set-output name=matrix::$( echo "$JSON" )     
- 
-          
-
+      - id: set-matrix
+        run: echo "::set-output name=matrix::$(ls b/** | jq -R -s -c 'split("\n")[:-1]')"
+  check:
+    needs: list-manifests
+    runs-on: ubuntu-latest
+    strategy:
+        matrix:
+            manifest: ${{ fromJson(needs.list-manifests.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v2   
+      - run: |
+          ./check-manifest ${{ martix.manifest }}
