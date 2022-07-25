@@ -16,10 +16,7 @@ jobs:
     outputs:
       matrix: ${{ steps.job1.outputs.matrix }}
     steps:
-      - id: filter
-        with:
-          filters: |
-            paths: '!b/xz'
+      
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
