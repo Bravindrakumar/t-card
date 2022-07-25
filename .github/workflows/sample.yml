@@ -9,16 +9,11 @@ on:
       - 'b/**'
       - '.github/workflows/sample.yml'
 jobs:
-  list-manifests:
+  build:
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v2
-      - id: set-matrix
-        run: |
-          echo ::set-output name=matrix::$(bash .github/shell/a.sh "$dev")
-          echo "$dev"
+      - run: python ./github/shell/determinefolder.py
         
   
   
