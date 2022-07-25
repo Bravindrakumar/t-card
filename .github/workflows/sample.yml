@@ -16,16 +16,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - id: set-matrix
-        run: echo "::set-output name=matrix::$(ls b/** | jq -R -s -c 'split("\n")[:-1]')"
+        run: |
+          echo ::set-output name=matrix::$(bash .github/shell/a.sh "$env")
+          echo "$env"
         
   
-  build:
-    needs: list-manifests
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        env: ${{ fromJson(needs.list-manifests.output.matrix) }}
-    steps:
-      - uses: actions/checkout@v2
-      - run: |
-          echo "${{ matrix.env }}"    
+  
