@@ -14,7 +14,7 @@ def main():
   exclude = set(['ab', 'zx'])
   directory_set = set([os.path.dirname(file_path) for file_path in modified_files])
   for directory in directory_set:
-    if directory == "directory_set"
+    if directory == "directory_set":
     envs.append({ "env":directory })
   if len(envs) == 0:
     print("no environment parsed from input file:")
