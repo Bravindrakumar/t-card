@@ -15,7 +15,7 @@ def main():
   directory_set = set([os.path.dirname(file_path) for file_path in modified_files])
   for directory in directory_set:
     if directory == "directory_set":
-    b.append({ "env":directory })
+    b.append({ "env": directory })
   if len(b) == 0:
     print("no environment parsed from input file:")
     print(modified_fils)
