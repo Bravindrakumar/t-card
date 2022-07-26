@@ -9,11 +9,12 @@ def main():
   with open(sys.argv[1]) as input_file:
     modified_files = json.loads(input_file.read())
   # compile the list of modified files into unique set of root directories
-  exclude = set(['ab', 'zx'])
+  
   envs = []
+  exclude = set(['ab', 'zx'])
   directory_set = set([os.path.dirname(file_path) for file_path in modified_files])
   for directory in directory_set:
-    dirs[:] = [d for d in dirs if d not in exclude]
+    if directory == "directory_set"
     envs.append({ "env":directory })
   if len(envs) == 0:
     print("no environment parsed from input file:")
