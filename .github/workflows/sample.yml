@@ -36,7 +36,7 @@ jobs:
           
               echo ::set-output name=matrix::$(python .github/shell/determinefolder.py "$deploy_git_diff")
           fi 
-          
-
-  
-  
+      - name: check output (Debug)
+        run: |
+          echo 'test ${{ steps.setup-env-matrix.outputs.matrix }}'
+          echo '${{ fromJson(steps.setup-env-matrix.outputs.matrix) }}'    
