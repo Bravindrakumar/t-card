@@ -7,7 +7,7 @@ jobs:
       - name: setup python
         run: |
           python .github/shell/determinefolder.py
-          echo "hi all"
+          echo "hi all 20"
         
           - 
         
