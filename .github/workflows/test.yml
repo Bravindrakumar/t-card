@@ -16,7 +16,7 @@ jobs:
             import os
             exclude_directories = set(['ab', 'zx'])
 
-            for dname, dirs,files in os.walk('./b'):
+            for dname, dirs,files in os.walk('.'):
                dirs[:] = [d for d in dirs if d not in exclude_directories]
                for fname in files:
                if(fname.lower().endswith(extensions)):
