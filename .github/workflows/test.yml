@@ -16,6 +16,6 @@ jobs:
             import os
             for root, dirs, files in os.walk("."):
                if "b" in dirs:
-                 dirs.remove("b")
+                 dirs.remove("b/az")
                for file in files:
-                 print(f"Dealing with file {root}/{file}")
+                 print(f"Dealing with file {dirs}/{file}")
