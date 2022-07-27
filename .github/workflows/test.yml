@@ -14,11 +14,8 @@ jobs:
         with:
           script: |
             import os
-            exclude_directories = set(['ab', 'zx'])
-
-            for dname, dirs,files in os.walk('.'):
-               dirs[:] = [d for d in dirs if d not in exclude_directories]
-               for fname in files:
-               if(fname.lower().endswith(extensions)):
-               fpath = os.path.join(dname, fname)
-                 print(fname)
+            for root, dirs, files in os.walk("."):
+               if "b" in dirs:
+                 dirs.excliude("b")
+               for file in files:
+                 print(f"Dealing with file {root}/{file}")
