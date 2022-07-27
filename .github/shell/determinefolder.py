@@ -13,7 +13,7 @@ def main():
   requirement_changes = sys.argv[1].split('\n')
   fileChangeRegex = re.compile(r'^\+\s\+')
   environment = ''
-  for change requirement_changes:
+  for change in requirement_changes:
     file_name_split_by_forward_slash = change.split('/')
     environment = file_name_split_by_forward_slash
     b.append({ "env": environment })
