@@ -14,6 +14,8 @@ jobs:
         with:
           script: |
             import os
+            path = b
+            exclude = set(['ab', 'zx'])
             print("Directory contents:")
-            for f in os.listdir():
-                print(f)
+            for path in os.listdir():
+                print(path)
