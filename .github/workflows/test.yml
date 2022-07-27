@@ -14,8 +14,11 @@ jobs:
         with:
           script: |
             import os
-            path = os.listdir('b')
-            exclude = set(['ab', 'zx'])
-            print("Directory contents:")
-            for path in os.listdir():
-                print(path)
+            exclude_directories = set(['ab', 'zx'])
+
+            for dname, dirs,files in os.walk('./b'):
+               dirs[:] = [d for d in dirs if d not in exclude_directories]
+               for fname in files:
+               if(fname.lower().endswith(extensions)):
+               fpath = os.path.join(dname, fname)
+                 print(fname)
