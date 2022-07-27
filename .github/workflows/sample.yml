@@ -39,5 +39,6 @@ jobs:
       - name: check output (Debug)
         run: |
           echo 'test ${{ steps.setup-env-matrix.outputs.matrix }}'
-          echo '${{ fromJson(steps.setup-env-matrix.outputs.matrix) }}'    
+          echo '${{ fromJson(steps.setup-env-matrix.outputs.matrix) }}' 
+          echo "hello world"
           
