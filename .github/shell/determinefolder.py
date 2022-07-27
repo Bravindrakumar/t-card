@@ -14,7 +14,7 @@ def main():
   fileChangeRegex = re.compile(r'^\+\s\+')
   environment = ''
   for change requirement_changes:
-    file_name_split_by_forward_slash = change.spli('/')
+    file_name_split_by_forward_slash = change.split('/')
     environment = file_name_split_by_forward_slash
     b.append({ "env": environment })
   
