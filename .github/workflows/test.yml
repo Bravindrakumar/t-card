@@ -18,7 +18,7 @@ jobs:
             import re
             import sys
             list1 = os.listdir()
-            for filename is list1:
+            for filename in list1:
             r=open(filename,"r")
             
             #b = []
