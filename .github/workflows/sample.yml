@@ -4,10 +4,12 @@ on:
     paths: 
       - 'b/**'
       - '.github/workflows/sample.yml'
+      - '.github/shell/determinefolder.py'
   push:
     paths: 
       - 'b/**'
       - '.github/workflows/sample.yml'
+      - '.github/shell/determinefolder.py'
 jobs:
   setup:
     runs-on: ubuntu-latest
