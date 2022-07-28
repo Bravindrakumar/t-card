@@ -31,16 +31,16 @@ jobs:
 
           if [[ $(echo "git_diff" | grep 'b/') ]]; then
             if ${{ github.event_name == 'pull_request' }}; then
-              b=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }} | grep '**/')
+              b=$(git diff --name-only origin/${{ github.base_ref }} origin/${{ github.head_ref }} | grep '**')
             else
-              b=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '**/')
+              b=$(git diff --name-only ${{ github.event.before }} ${{ github.sha }} | grep '**')
             fi  
           
               echo ::set-output name=matrix::$(python .github/shell/determinefolder.py "$b")
+              echo "$matrix"
           fi 
       - name: check output (Debug)
         run: |
-          echo 'test ${{ steps.setup-env-matrix.outputs.matrix }}'
           echo '${{ fromJson(steps.setup-env-matrix.outputs.matrix) }}' 
           echo "hello world"
           
