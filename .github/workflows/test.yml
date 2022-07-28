@@ -19,7 +19,7 @@ jobs:
             import sys
             list1 = os.listdir()
             for filename in list1:
-            r=open(filename,"r")
+               r=open(filename,"r")
             
             #b = []
             #exclude_directories = set(['ab', 'zx'])
