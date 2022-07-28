@@ -37,10 +37,5 @@ jobs:
             fi  
           
               echo ::set-output name=matrix::$(python .github/shell/determinefolder.py "$b")
-              echo "$matrix"
-          fi 
-      - name: check output (Debug)
-        run: |
-          echo '${{ fromJson(steps.setup-env-matrix.outputs.matrix) }}' 
-          echo "hello world"
+              echo "${{ matrix }}"
           
