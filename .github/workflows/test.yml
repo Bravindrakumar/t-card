@@ -17,9 +17,14 @@ jobs:
             import json
             import re
             import sys
-            list1 = os.listdir()
-            for filename in list1:
-               r=open(filename,"r")
+            def main():
+               if len(sys.argv) < 2:
+               print("Path to file containing modified paths is required.")
+               exit(1)
+               with open(sys.argv[1]) as input_file:
+               modified_files = input_file.read()
+            if __name__ == __"main":
+              main
             
             #b = []
             #exclude_directories = set(['ab', 'zx'])
