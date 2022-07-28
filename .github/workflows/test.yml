@@ -14,8 +14,17 @@ jobs:
         with:
           script: |
             import os
-            exclude_directories = set(['ab', 'zx'])
+            import json
+            import re
+            import os
+            import os,re
+            list1 = os.listdir()
+            for filename is list1:
+            r=open(filename,"r")
+            
+            #b = []
+            #exclude_directories = set(['ab', 'zx'])
 
-            for dname, dirs,files in os.walk('./b'):
-               dirs[:] = [d for d in dirs if d not in exclude_directories]
-               print(dirs)
+            #for dname, dirs,files in os.walk('./b'):
+               #dirs[:] = [d for d in dirs if d not in exclude_directories]
+                  
