@@ -18,10 +18,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         
-      - name: determine setup configuration file change
-        id: env-config-diff-matrix
-        run: |
-          export DIFF=$( git diff --dirstat=files,0,cumulative ${{ github.event.pull_request.base.sha }} | awk -F ' ' '{print $2}' )
-          echo "$DIFF"
+      - run: |
+          a= 1
+          echo "$a"
 
           
