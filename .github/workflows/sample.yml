@@ -4,12 +4,12 @@ on:
     paths: 
       - 'b/**'
       - '.github/workflows/sample.yml'
-      - '.github/shell/determinefolder.py'
+      
   push:
     paths: 
       - 'b/**'
       - '.github/workflows/sample.yml'
-      - '.github/shell/determinefolder.py'
+      
 jobs:
   env-config-diff:
     runs-on: ubuntu-latest
