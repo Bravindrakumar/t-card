@@ -17,15 +17,11 @@ jobs:
       matrix: ${{ steps.env-config-matrix.outputs.matrix }}
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
+        
       - name: determine setup configuration file change
         id: env-config-diff-matrix
         run: |
           export DIFF=$( git diff --dirstat=files,0,cumulative ${{ github.event.pull_request.base.sha }} | awk -F ' ' '{print $2}' )
           echo "$DIFF"
-          echo "::set-output name=diff::$( echo $DIFF | sed ':a;N;$!ba;s/\n/%0A/g' )"
-          
 
           
